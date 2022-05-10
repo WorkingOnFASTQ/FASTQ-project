@@ -1,0 +1,82 @@
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
+def readFastq(filename):
+    seqs = []
+    quals = []
+    with open(filename) as fo:
+        while True:
+            fo.readline()
+            seq = fo.readline().rstrip()
+            fo.readline()
+            qual = fo.readline().rstrip()
+            if len(seq) == 0:
+                break
+            seqs.append(seq)
+            quals.append(qual)
+    return seqs, quals
+sequences, qualities = readFastq(r"sample.fastq")
+#print(sequences[:2])
+#print(qualities[:2])
+
+def Phred33ToQ(qualities):
+    var=ord(qualities)-33
+    return var
+
+data=dict()
+count=0
+purin=0
+pyrim=0
+A = 0
+G = 0
+C = 0
+T = 0
+
+for i in range(len(sequences)):
+    count=0
+    for j in range(len(sequences[i])):
+
+        if sequences[i][j] =='A':
+            A+=1
+        elif sequences[i][j] =='T':
+            T+=1
+        elif sequences[i][j] == 'G':
+            G+=1
+        elif sequences[i][j] == 'C':
+            C+=1
+        score=ord(qualities[i][j])-33
+        count+=score
+    average=count/len(qualities[i])
+    data["s_{}".format(i+1)]=average
+    purin=C+T
+    pyrim=A+G
+'''
+
+print(data.values())
+print(data.keys())
+print("...........")
+print(purin)
+print(pyrim)
+print("..............")
+sum=A+T+G+T
+print('value of A  ',(A/sum)*100)
+print('value of t  ',(T/sum)*100)
+print('value of g  ',(G/sum)*100)
+print('value of c ',(C/sum)*100)
+
+print(",,,,,,,,,,,,,,,,")
+print(sum)
+'''
+
+
+
+x=list(data.keys())
+y=list(data.values())
+plt.bar(x,y)
+plt.show()
+
+names=["A","G","C","T", "PURINE", "PYRIMIDENE"]
+val=[ A, G, C, T, purin, pyrim]
+plt.bar(names, val)
+plt.show()

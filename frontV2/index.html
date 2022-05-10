@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/lib/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lib/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars"></i>
+                  </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Wiki</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"> fastaq </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+                <div class="container">
+                  <div class="search">
+                    <input type="text" placeholder="search here">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </div>
+
+              </div>
+          </div>
+        </div>
+    </nav>
+
+
+    <section>
+      <div class="container">
+    <h1 class="text-center mb-5 text-danger">Count Basis of DNA Sequence , Purine and Pyrimidine And  Their Percentage  </h1>
+    <div class="row">
+      <div class="col-md-6">
+        <form>
+          <label for="DNA_Sequence" class="">DNA Sequence </label>
+          <input id="DNA_Sequence" type="text"
+           value="TTTTTTCCCCCCCCCCCCGGGGGGGGGGGGGGGGAAAAAAAAAAAAATTTTTTTTTTTCCCGGGGGGAAAAAAAAAAA"/>
+          <input type="button" class="mx-auto d-block w-75" value="count" onClick="countNucleotides()" />
+      </form>
+      </div><!-- col-6 -->
+
+      <div class="col-md-6">
+        <h2 class=" text-center">A,T,G,C Basis Of Dna Sequence:</h2>
+        <span >Nucleotide Count And PerCentage Of Basis:<pre id="content"></pre></span>
+        <span >Purine and Pyrimidine Count<pre id="content1"></pre></span>
+
+      </div><!-- col-6 -->
+    </div><!-- row -->
+  </div><!-- container -->
+</section>
+
+
+
+    <div class="histogram">
+      <div class="histogram" id="child">
+        <h1 class=" text-danger text-center">Chart show count Of Dna Basis Related To Previous Input:</h1>
+        <canvas id="BarChart"></canvas>
+      </div>
+    </div>
+
+   
+
+
+    </div>
+
+
+    </div>
+
+    <script>
+    function countNucleotides() {
+      i = 0;
+  
+     var gCount = 0;
+     var tCount = 0;
+     var  cCount = 0;
+     var  aCount = 0;
+     var other = 0;
+     var  ag=0;
+     var  ct=0;
+
+      dna = document.getElementById("DNA_Sequence").value;
+      dna_length = dna.length;
+      // var sequenceLength = len(dna);
+
+  
+      // Repeat this loop as long as the value of i is less than 3
+      while (i < dna_length) {
+          current_letter = dna[i];
+  
+          if (current_letter == "G") {
+              gCount += 1;
+          } else if (current_letter == "T") {
+              tCount += 1;
+          } else if (current_letter == "C") {
+              cCount += 1;
+          } else if (current_letter == "A") {
+              aCount += 1;
+          } else if (current_letter != " ") {
+              other += 1;
+          }
+  
+          // update the current value of i by 1 each time
+          i = i + 1;
+    
+      }
+      A=  (aCount / dna_length) * 100;
+     C=  (cCount / dna_length) * 100;
+     G=  (gCount / dna_length) * 100;
+     T= (tCount / dna_length) * 100;
+  
+    
+      message = "Sequence:\n" + dna;
+      message += "\n\nNucleotide Count:" +
+          "\nG: " + gCount +
+          "\nT: " + tCount +
+          "\nC: " + cCount +
+          "\nA: " + aCount +
+          "\nPercentage of A's in sequence: " + A +
+          "\nPercentage of C's in sequence: " + C+
+          "\nPercentage of G's in sequence: " + G+
+          "\nPercentage of T's in sequence: " + T ;
+      
+      if (other > 0) {
+          message += "\nOther: " + other;
+      }
+
+      for(var h=0; h<dna_length; h++)
+      {
+        current_letter1 = dna[h];
+
+        if(current_letter1=="A"|| current_letter1=="G"){
+          ag++;
+        }
+        else if(current_letter1=="T"|| current_letter1=="C"){
+          ct++
+
+        }
+      }
+      message1= "Sequence:\n" + dna;
+      message1 += "\n\nPurine and Pyrimidine Count:" +
+          "\nPurine: " + ag +
+          "\nPyrimidine: " + ct ;
+          
+  
+      document.getElementById("content").innerHTML = message;
+      document.getElementById("content1").innerHTML = message1;
+  
+
+const ctx = document.getElementById('BarChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['A', 'T', 'G', 'C', 'Purine', 'Pyrimidine'],
+        datasets: [{
+            label: '# of Votes',
+            //  data: [1532, 1378, 829, 776, 2154, 2361],
+             data: [aCount, tCount, gCount, cCount,ag , ct],
+
+            backgroundColor: [
+                'rgba(255, 99, 132)',
+                'rgba(54, 162, 235)',
+                'rgba(255, 206, 86)',
+                'rgba(75, 192, 192)',
+                'rgba(153, 102, 255)',
+                'rgba(255, 159, 64)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+}
+
+
+
+  </script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="Js/chart.js"></script>
+    <script src="Js/chart2.js"></script>
+    <script src="Js/jquery-3.3.1.slim.min.js"></script>
+    <script src="Js/popper.min.js"></script>
+    <script src="Js/bootstrap.min.js"></script>
+</body>

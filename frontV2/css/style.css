@@ -1,0 +1,147 @@
+
+@font-face {
+  font-family: "semiBold";
+  src: url(../font/ExpoArabic/ExpoArabic-SemiBold.ttf)
+}
+
+@font-face {
+  font-family: "regular";
+  src: url(../font/ExpoArabic/ExpoArabic-Medium.ttf);
+}
+
+@font-face {
+  font-family: "bold";
+  src: url(../font/ExpoArabic/ExpoArabic-Book.ttf);
+}
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline-width: 0px !important;
+  outline-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.navbar{  
+  background-color: #db1a54;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999 !important;
+  padding: 20px 0px;
+  position: fixed;
+  margin-bottom: 100px;
+}
+
+.navbar .navbar-collapse {
+  justify-content: space-around;
+}
+.navbar .navbar-nav .nav-item {
+  margin: 0px 20px;
+
+}
+.navbar .navbar-nav .nav-item .nav-link{
+  color: #fff;
+  font-size: 20px !important;
+  line-height: 42px !important;
+  font-family: 'regular';
+}
+.navbar .search input{
+  outline: none;
+  border: none;
+  text-align: center;
+  padding: 8px 25px;
+  padding-right: 40px;
+  background-color: #fff;
+  font-size: 25px;
+  line-height: 38px;
+  font-family: 'regular';
+  border-radius: 38px;
+}
+.navbar .search input:focus::placeholder{
+  color: #fff;
+
+}
+.container div.search {
+  position: relative;
+  width: 300px;
+  height: 50px;
+}
+
+.container .search i{
+position: absolute;
+right: -55px;
+top: 18px;
+}
+
+.genom{
+  margin-top: 100px;
+}
+.histograms {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+  padding: 20px;
+  padding-top: 0;
+}
+.histogram {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px ;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+.histogram h2 {
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #666;
+  text-align: center;
+}
+
+input[type=text]{
+background-color: rgb(253, 213, 223);
+width: 100%;
+height: 60px;
+border: solid 1px rgb(194, 36, 70);
+margin-bottom: 3px;
+
+}
+input[type=button]{
+  background-color: rgb(207, 24, 79);
+  color: beige;
+  font-weight: bold;
+  height: 40px;
+border: solid 1px rgb(211, 41, 69);
+}
+label,h2{
+  font-weight: bold;
+  font-size: 16px;
+  color: #db1a54;
+  
+}
+span pre{
+  color: rgb(126, 18, 50);
+
+}
+span{
+  color: rgb(59, 4, 22);
+  font-weight: bold;
+}
+body{
+  background-color:rgb(207, 197, 197);
+}
+h1{
+  background-color: rgb(224, 212, 215);
+}
+canvas{
+  background-color: rgb(221, 217, 218);
+}
